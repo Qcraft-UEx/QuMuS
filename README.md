@@ -18,6 +18,14 @@ This tool combines two main components:
 
 Together, these components provide a complete pipeline for quantum mutation testing, from the creation of mutants to their optimized execution on real quantum devices.
 
+<p align="center">
+   <picture>
+     <source media="(prefers-color-scheme: dark)" srcset="https://github.com/Qcraft-UEx/QuMuS/blob/main/images/qumus1.jpg?raw=true" width="60%">
+     <img src="https://github.com/Qcraft-UEx/QuMuS/blob/main/images/qumus1.jpg?raw=true" width="60%" alt="QuMuS1">
+   </picture>
+</p>
+
+
 ---
 
 ## Overview
@@ -52,12 +60,28 @@ The tool has been validated on the IBM Quantum Platform, achieving:
 - Option to generate mutants for all input states to ensure exhaustive test coverage.
 - Sends mutants in JSON format to the Scheduler for execution.
 
+<p align="center">
+   <picture>
+     <source media="(prefers-color-scheme: dark)" srcset="https://github.com/Qcraft-UEx/QuMuS/blob/main/images/qumus2.jpg?raw=true" width="60%">
+     <img src="https://github.com/Qcraft-UEx/QuMuS/blob/main/images/qumus2.jpg?raw=true" width="60%" alt="QuMuS2">
+   </picture>
+</p>
+
+
 2. Scheduling (Scheduler)
 - Stores mutants in a queue and applies a variant of FIFO scheduling (AL-FIFO).
 - Combines multiple mutants into a single composite quantum circuit, depending on available qubits.
 - Executes on real quantum hardware (IBM Quantum, AWS Braket, etc.).
 - Automatically unschedules and separates the results for each mutant after execution.
 - Results are stored in a database and visualized via the web interface.
+
+<p align="center">
+   <picture>
+     <source media="(prefers-color-scheme: dark)" srcset="https://github.com/Qcraft-UEx/QuMuS/blob/main/images/qumus3.png?raw=true" width="45%">
+     <img src="https://github.com/Qcraft-UEx/QuMuS/blob/main/images/qumus3.png?raw=true" width="45%" alt="QuMuS3">
+   </picture>
+</p>
+
 
 ---
 ## Installation
@@ -113,7 +137,7 @@ QuMuS is licensed under the [MIT License](https://github.com/Qcraft-UEx/QCRAFT/b
 ## Collaborators
 
 <div align="center">
-  <img src="https://github.com/Qcraft-UEx/QCRAFT/blob/main/docs/_images/Logo_UNEX.png" width="30%" alt="Descripción de la imagen 1"/>
-  <img src="https://github.com/Qcraft-UEx/QCRAFT/blob/main/docs/_images/Logo_UCLM.jpg" width="30%" alt="Descripción de la imagen 2"/>
+  <img src="https://github.com/Qcraft-UEx/QCRAFT/blob/main/docs/_images/Logo_UNEX.png" width="30%" alt="Logo UNEX"/>
+  <img src="https://github.com/Qcraft-UEx/QCRAFT/blob/main/docs/_images/Logo_UCLM.jpg" width="30%" alt="Logo UCLM"/>
 </div>
 
