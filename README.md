@@ -8,6 +8,9 @@
 # QuMuS: Quantum Mutation and Scheduling Tool
 [![PyPI Version](https://img.shields.io/pypi/v/autoscheduler.svg)](https://pypi.org/project/autoscheduler/)
 ![Python Versions](https://img.shields.io/badge/python-3.9%20|%203.10%20|%203.11%20|%203.12%20|%203.13-blue.svg)
+![Web App](https://img.shields.io/badge/web--app-QuMu%20Client%20(React%20%2B%20Flask)-brightgreen)
+![Database](https://img.shields.io/badge/database-MongoDB-green)
+![Providers](https://img.shields.io/badge/quantum%20providers-IBM%20Quantum%20%7C%20AWS%20Braket-purple)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/Qcraft-UEx/QCRAFT/blob/main/LICENSE)
 
 **QuMuS** is a tool designed to optimize quantum software testing through the generation and scheduling of quantum circuit mutants.
