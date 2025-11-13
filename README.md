@@ -13,7 +13,7 @@
 **QuMuS** is a tool designed to optimize quantum software testing through the generation and scheduling of quantum circuit mutants.
 This tool combines two main components:
 
-1. QMu (Quantum Mutator): Responsible for the creation of quantum circuit mutants based on a given Circuit Under Test (CUT) and a configurable set of mutation operators.
+1. QuMu (Quantum Mutator): Responsible for the creation of quantum circuit mutants based on a given Circuit Under Test (CUT) and a configurable set of mutation operators.
 2. Scheduler: Executes the parallel composition of mutants on real quantum hardware, minimizing execution time and cost.
 
 Together, these components provide a complete pipeline for quantum mutation testing, from the creation of mutants to their optimized execution on real quantum devices.
@@ -23,7 +23,7 @@ Together, these components provide a complete pipeline for quantum mutation test
 ## Overview
 
 Traditional quantum mutation testing executes mutants sequentially, resulting in high costs and long queue times on quantum hardware.
-QuMu overcomes this by generating mutants automatically and scheduling multiple mutants in parallel within a single execution.
+QuMuS overcomes this by generating mutants automatically and scheduling multiple mutants in parallel within a single execution.
 
 The tool has been validated on the IBM Quantum Platform, achieving:
 
@@ -34,9 +34,16 @@ The tool has been validated on the IBM Quantum Platform, achieving:
 
 ## Main Features
 
-1. Quantum Mutant Generation (QMu)
+1. Quantum Mutant Generation (QuMu)
 - Web-based interface to define the Circuit Under Test (CUT).
 - Supports loading circuits from Quirk, Qiskit, or JSON format.
+    - The exported JSON will look similar to:
+```bash
+{
+  "url": "https://algassert.com/quirk#circuit={'cols':[['H'],['•','X'],['Measure','Measure']]}",
+  "shots": 10000
+}
+```
 - Offers 18 mutation operators classified into:
     - Initialization errors
     - Swap gates
@@ -55,6 +62,13 @@ The tool has been validated on the IBM Quantum Platform, achieving:
 ---
 ## Installation
 
+### Installing QuMu (Mutant Generator)
+The QuMu Client is available online and requires no local installation.
+
+You can access it directly from your browser: https://alarcosj.esi.uclm.es/qumu
+
+
+### Installing the Scheduler
 Install all dependencies:
 
 ```bash
@@ -72,6 +86,18 @@ sudo docker compose up --build
 
 ## Usage
 
+1. The Client (QuMu) generates all mutants from a given Circuit Under Test. Choosing mutation operators and input configurations.
+
+2. These mutants are sent to the Scheduler.
+
+3. The Scheduler groups them into composite circuits according to available qubits.
+
+4. The combined circuit is executed on the selected quantum provider.
+
+5. Results are unscheduled, split per mutant, and stored for analysis.
+
+This approach allows massive parallel execution of mutants, optimizing time, cost, and quantum resource usage.
+
 ---
 
 ## Changelog
@@ -80,4 +106,4 @@ The changelog is available [here](https://github.com/Qcraft-UEx/QCRAFT-AutoSched
 ---
 
 ## License
-QCRAFT AutoScheduler is licensed under the [MIT License](https://github.com/Qcraft-UEx/QCRAFT/blob/main/LICENSE)
+QuMuS is licensed under the [MIT License](https://github.com/Qcraft-UEx/QCRAFT/blob/main/LICENSE)
