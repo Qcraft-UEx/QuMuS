@@ -107,3 +107,13 @@ The changelog is available [here](https://github.com/Qcraft-UEx/QCRAFT-AutoSched
 
 ## License
 QuMuS is licensed under the [MIT License](https://github.com/Qcraft-UEx/QCRAFT/blob/main/LICENSE)
+
+---
+
+## Collaborators
+
+<div align="center">
+  <img src="https://github.com/Qcraft-UEx/QCRAFT/blob/main/docs/_images/Logo_UNEX.png" width="30%" alt="Descripción de la imagen 1"/>
+  <img src="https://github.com/Qcraft-UEx/QCRAFT/blob/main/docs/_images/Logo_UCLM.jpg" width="30%" alt="Descripción de la imagen 2"/>
+</div>
+
