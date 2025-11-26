@@ -90,7 +90,7 @@ The tool has been validated on the IBM Quantum Platform, achieving:
 ## Installation
 
 ### Installing QuMu (Mutant Generator)
-The QuMu Client is available online and requires no local installation.
+The QuMu Client is available online and requires no local installation. Anyway, the source code is available in this repository for downloading.
 
 You can access it directly from your browser: https://alarcosj.esi.uclm.es/qumu
 
