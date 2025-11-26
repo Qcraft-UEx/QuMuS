@@ -1,0 +1,4 @@
+{
+	"SAPI_HOME" : "https://na-west-1.cloud.dwavesys.com/sapi/v2/",
+	"SAPI_TOKEN" : "DEV-XXX"
+}

@@ -1,0 +1,32 @@
+from qiskit_ibm_runtime.fake_provider import FakeAlgiers, FakeAlmadenV2
+from qiskit import transpile
+from qiskit import QuantumRegister, ClassicalRegister, QuantumCircuit
+from qiskit.circuit.library.standard_gates import *
+from qiskit.visualization import plot_histogram
+from qiskit.quantum_info.operators import Operator
+from math import pi
+import numpy 
+from qiskit.visualization import plot_state_city 
+from qiskit.visualization import plot_histogram
+from qiskit.circuit.library import MCMT
+
+qreg = QuantumRegister(#QUBITS#, 'q') 
+creg = ClassicalRegister(#OUTPUT_QUBITS#, 'c')
+circuit = QuantumCircuit(qreg, creg) 
+
+#INITIALIZATION#
+
+#CODE#
+
+#MEASURES#
+
+shots = #SHOTS#
+
+backend = FakeAlmadenV2()
+transpiled_circuit = transpile(circuit, backend)
+job = backend.run([transpiled_circuit])
+
+result = job.result()
+histogram = result.get_counts()
+print(histogram)
+#print(circuit)

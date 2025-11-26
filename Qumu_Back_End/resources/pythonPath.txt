@@ -1,0 +1,1 @@
+/Users/macariopolousaola/opt/anaconda3/bin:/Users/macariopolousaola/opt/anaconda3/condabin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:.:/Library/Apple/usr/bin

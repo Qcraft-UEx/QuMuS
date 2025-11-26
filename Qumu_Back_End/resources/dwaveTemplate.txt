@@ -1,0 +1,36 @@
+from dwave.system import EmbeddingComposite, DWaveSampler, LeapHybridSampler
+from dimod.reference.samplers import ExactSolver
+from dimod import BinaryQuadraticModel
+from collections import defaultdict
+from math import *
+
+###--PARAMETERS--###
+#packageWeight = 6
+
+
+#VARIABLES#
+
+###--INITIALIZATION--###
+offset = 0
+Q = defaultdict(int)
+
+#RULES#
+
+offset += lambda_Rule1*(packageWeight**2)
+for i in range (0, len(Boxes), 1):
+	for j in range (i+1, len(Boxes), 1):
+		var1 = Boxes[i]
+		var2 = Boxes[j]
+		Q[(var1, var2)] += lambda_Rule2*(2*Weights[i]*Weights[j])
+
+
+##Solve
+bqm = BinaryQuadraticModel.from_qubo(Q, offset=offset)
+solver = ExactSolver()
+result = solver.sample(bqm)
+
+##LeapHybridSampler
+#solver = LeapHybridSampler()
+#result = solver.sample(bqm)
+
+print(result)

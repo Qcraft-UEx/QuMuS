@@ -1,0 +1,24 @@
+from qiskit import QuantumRegister, ClassicalRegister, QuantumCircuit, Aer, execute
+from qiskit.circuit.library.standard_gates import *
+from qiskit.quantum_info.operators import Operator
+from qiskit.visualization import plot_state_city 
+from qiskit.visualization import plot_histogram
+from numpy import pi
+
+qreg = QuantumRegister(#QUBITS#, 'q') 
+creg = ClassicalRegister(#OUTPUT_QUBITS#, 'c')
+circuit = QuantumCircuit(qreg, creg) 
+
+#INITIALIZATION#
+
+#CODE#
+
+#MEASURES#
+
+shots = #SHOTS#
+
+backend = Aer.get_backend('statevector_simulator')
+job = execute(circuit, backend, shots=shots, memory=True) 
+result = job.result() 
+histogram = result.get_counts()
+print(histogram)

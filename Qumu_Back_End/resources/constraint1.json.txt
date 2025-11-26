@@ -1,0 +1,1 @@
+{"left":{"type":"GIndexedSummation","from":{"index":"j","value":{"type":"GIntValue","value":0}},"to":{"type":"GParameter","parameter":"m"},"body":{"exprs":[{"type":"GUseOfX","indexes":"i, j"}]}},"right":{"type":"GParameter","parameter":"K"},"forAlls":[{"variable":"i","start":0,"end":{"type":"GParameter","parameter":"n"}}]}
