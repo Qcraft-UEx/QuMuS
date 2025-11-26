@@ -1,0 +1,32 @@
+<h1>Strategy Results</h1>
+
+<p>
+    If you want to exercise the system just with some specific inputs, write them in the following area. Otherwise, the system will generate all possible combinations of the input qubits.
+    <br>
+    Each input must have so many 0 and 1 digits as input qubits there are. Since your circuit has {{ manager.getNumberOfInputQubits() }} qubits, you must enter inputs of {{ manager.getNumberOfInputQubits() }} 
+    binary strings, composed of 0 and 1.
+    <br>
+    Do click on an input to remove it.
+    <br>
+    <i>Input:</i>&nbsp;<input type="text" [(ngModel)]="currentInput">&nbsp;<u style="color:blue" (click)="addInput()">Add</u>
+    <br>
+    <span *ngFor="let input of inputs; let i = index">
+        <u (click)="removeInput(i)">{{ input }}</u> <span *ngIf="i<inputs.length-1">, </span>
+    </span>
+</p>
+
+Reduce table (show only errors) <input type="checkbox" [(ngModel)]="reduceTable"> &nbsp;
+<button (click)="runMutants()">Run mutants (strategy)</button>
+&nbsp;&nbsp;
+<button (click)="stopExecution()">Stop execution</button>
+
+<ng-container *ngIf="runningMutants">
+    {{ killedMutants }} <strong>killed mutants</strong> of &nbsp;{{ killedMutants+aliveMutants }}. 
+    &nbsp;
+    Non-compilable mutants: <span>{{ nonCompilableMutants }} </span>
+    <strong>Mutation score:</strong>&nbsp;{{ killedMutants/(manager.mutants.length) }}<br>
+    &nbsp;
+    <progress [value]="currentMutant" [max]="manager.mutants.length"></progress>
+
+    <span id="resultsSpan"></span>
+</ng-container>

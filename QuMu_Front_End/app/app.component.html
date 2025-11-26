@@ -1,0 +1,48 @@
+<style>
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 8px 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .content {
+    display: flex;
+    margin: 82px auto 32px;
+    padding: 0 16px;
+    max-width: 960px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  a,
+  a:visited,
+  a:hover {
+    color: #1976d2;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #125699;
+  }
+</style>
+
+<div>
+  <span style="color : red">{{ getError() }}</span>
+
+  <app-circuit></app-circuit>
+  <app-operators></app-operators>
+  <app-mutants-generated></app-mutants-generated>
+
+  <app-mutant-code *ngIf="manager.showMutantCode"></app-mutant-code>
+
+  <app-simple-result *ngIf="manager.executionAlgorithm=='Simple'"></app-simple-result>
+
+  <app-strategy-results *ngIf="manager.executionAlgorithm!='Simple'"></app-strategy-results>
+</div>

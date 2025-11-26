@@ -1,0 +1,91 @@
+<app-spinner></app-spinner>
+
+<h1>Mutant Code</h1>
+
+<ng-container *ngIf="manager.selectedMutant">
+    <table style="border : solid 1px">
+        <tr>
+            <th colspan="5">Selected mutant details</th>
+        </tr>
+        <tr>
+            <th>Index</th>
+            <th>Column</th>
+            <th>Row</th>
+            <th>Operator</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td align="center">{{ manager.selectedMutant.mutantIndex }}</td>
+            <td align="center">{{ manager.selectedMutant.mutatedColumn }}</td>
+            <td align="center">{{ manager.selectedMutant.mutatedRow }}</td>
+            <td align="center">{{ manager.selectedMutant.mutationOperator }}</td>
+            <td><u style="color :blue" (click)="showOrHideQuirk()">Show or hide Quirk</u></td>
+        </tr>
+        <tr>
+            <td colspan="5">
+                <textarea [(ngModel)]="manager.selectedMutant.circuit!.textQuirkCode" scrolling="auto" frameborder="0"
+                    style=" position: relative; height: 3em; width: 90%;"></textarea>        
+            </td>
+        </tr>
+        <tr>
+            <td colspan="5">
+                <iframe [hidden]="hideQuirk" [src]="url" sandbox="allow-scripts" scrolling="auto" frameborder="0"
+                style=" position: relative; height: 20em; width: 100%;" sandbox="allow-scripts"></iframe>        
+            </td>
+        </tr>
+    </table>
+
+    <table *ngIf="manager.selectedMutant.circuit?.qiskitCode">
+        <tbody [hidden]="hideQiskit">
+            <tr>
+                <th>
+                    Original&nbsp;
+                    <u><i (click)="runOne(manager.selectedCircuit!, 'original')">(run only the original)</i></u>
+                </th>
+                <th>Mutant&nbsp;
+                    <u><i (click)="runOne(manager.selectedMutant.circuit!, 'mutant')">(run only this mutant)</i></u>
+                </th>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <pre *ngFor="let line of manager.selectedCircuit!.qiskitCode">{{ line }}</pre>
+                </td>
+                <td valign="top">
+                    <ng-container *ngFor="let line of manager.selectedMutant!.circuit!.qiskitCode; let i = index">
+                        <ng-container *ngIf="manager.selectedCircuit!.qiskitCode[i]!=line">
+                            <pre><mark>{{ line }}</mark></pre>
+                        </ng-container>
+                        <ng-container *ngIf="manager.selectedCircuit!.qiskitCode[i]==line">
+                            <pre>{{ line }}</pre>
+                        </ng-container>
+                    </ng-container>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" id="consoles" align="center"></td>
+            </tr>
+            <tr>
+               <td>
+                    <div *ngFor="let result of originalResults">
+                        <ng-container *ngIf="result.frequency>0">
+                            <mark>{{ JSON.stringify(result) }}</mark>
+                        </ng-container>
+                        <ng-container *ngIf="result.frequency==0">
+                            {{ JSON.stringify(result) }}
+                        </ng-container>
+                    </div>
+                </td>
+                <td>
+                    <div *ngFor="let result of mutantResults">
+                        <ng-container *ngIf="result.frequency>0">
+                            <mark>{{ JSON.stringify(result) }}</mark>
+                        </ng-container>
+                        <ng-container *ngIf="result.frequency==0">
+                            {{ JSON.stringify(result) }}
+                        </ng-container>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</ng-container>

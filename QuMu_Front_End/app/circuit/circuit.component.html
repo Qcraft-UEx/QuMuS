@@ -1,0 +1,50 @@
+<h1>Circuits</h1>
+
+<table>
+    <tr>
+        <td>
+            <strong>Available circuits:</strong>&nbsp;
+            <select [(ngModel)]="originalCircuitName" (ngModelChange)="selectCircuit()">
+                <option [ngValue]="null" disabled>Select a circuit</option>
+                <option *ngFor="let circuit of circuits" [ngValue]="circuit.id">
+                    {{ circuit.id }}
+                </option>
+            </select>
+        </td>
+        <td>
+            <strong>Import from Qiskit URL:</strong> 
+            <input type="url" [(ngModel)]="qiskitURL" size="100"><button (click)="importQiskit()">Import</button>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <strong>Generate random circuit:</strong>
+            <br>
+            qubits: <input type="number" [(ngModel)]="randomQubits" min="2" step="1">
+            &nbsp;
+            columns: <input type="number" [(ngModel)]="randomColumns" min="2" step="1">
+            &nbsp;
+            deterministic (i.e., no superpositions): <input type="checkbox" [(ngModel)]="randomButDeterministic">
+            &nbsp;
+            start with H: <input type="checkbox" [(ngModel)]="randomAndStartWithH">
+            <button (click)="generateExtremaduraCircuit()">Generate Extremeño's circuit</button>           
+            <button (click)="generateRandomCircuit()">Generate</button>
+        </td>
+    </tr>
+</table>
+
+<div>
+    <b>Original Quirk code:</b>
+    <br>
+    <textarea [(ngModel)]="selectedCircuit.textQuirkCode" scrolling="auto" frameborder="0"
+    style=" position: relative; height: 3em; width: 90%;"></textarea>
+    <br>
+    <input type="text" [(ngModel)]="selectedCircuit.id" placeholder="circuit name">
+    <button (click)="save()">Save</button>
+    <button (click)="draw()">Draw</button>
+    &nbsp;
+    <u style="color : blue" (click)="hideQuirk=!hideQuirk">Show or hide Quirk</u>
+</div>
+
+<iframe [hidden]="hideQuirk" [src]="url" sandbox="allow-scripts" scrolling="auto" frameborder="0"
+    style=" position: relative; height: 20em; width: 100%;" sandbox="allow-scripts"></iframe>

@@ -1,0 +1,42 @@
+<app-spinner></app-spinner>
+
+<h1>Operators</h1>
+
+Qiskit template: <select [(ngModel)]="manager.selectedQiskitTemplate">
+    <option *ngFor="let qt of manager.qiskitTemplates" [ngValue]="qt">
+        {{ qt }}
+    </option>
+</select>
+
+<table border="1">
+    <tr>
+        <th colspan="2" *ngIf="manager.selectedCircuit">
+            <u (click)="selectAll()">Operators</u>
+            &nbsp;
+            <i>Apply on: Columns: <input type="text" [(ngModel)]="manager.selectedCircuit.mutableColumns">
+            &nbsp; Rows: <input type="text" [(ngModel)]="manager.selectedCircuit.mutableRows"></i>
+        </th>
+    </tr>
+    <tr *ngFor="let family of families">
+        <th>
+            <u (click)="family.select()">{{ family.name }}</u>
+        </th>
+        <td>
+            <span *ngFor="let operator of family.operators">
+                <input type="checkbox" [(ngModel)]="operator.selected">
+                {{ operator.name }}
+            </span>&nbsp;
+        </td>
+    </tr>
+    <tr>
+        <th colspan="2">
+            Input qubits: <input type="text" [(ngModel)]="manager.inputQubits" (change)="reloadOriginalCode()">&nbsp;
+            Output qubits: <input type="text" [(ngModel)]="manager.outputQubits" (change)="reloadOriginalCode()">&nbsp;
+            Shots: <input type="number" min="100" step="10" [(ngModel)]="manager.shots" (change)="reloadOriginalCode()">
+            &nbsp;
+            <input type="checkbox" [(ngModel)]="manager.generateWithAllInputs">Generate with all inputs
+            &nbsp;
+            <button (click)="generateMutants()">Generate mutants</button>
+        </th>
+    </tr>
+</table>

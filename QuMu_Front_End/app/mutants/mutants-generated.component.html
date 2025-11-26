@@ -1,0 +1,74 @@
+<h1>Mutants Generated</h1>
+
+<div *ngIf="manager.mutants.length > 0">
+  <div>
+      <strong>Generated mutants.</strong>&nbsp;<i>Do click on one mutant to show/hide its details.</i>
+      &nbsp;
+      <button (click)="saveMutants()">Save mutants</button>
+      &nbsp;
+      <button (click)="buildUnexCurls()">Build CURL's for Extremadura</button>
+      &nbsp;
+      Batch size: <input type="number" min="1" [(ngModel)]="batchSize">
+      <button *ngIf="unexCurls.length > 0" (click)="sendBatchToUnex()">
+        Send batch of {{ batchSize }} CURLS to UNEX
+      </button>
+      &nbsp;
+      <button *ngIf="unexCurls.length > 0" (click)="sendToUnexOneByOne()">Send to UNEX one by one</button>
+      &nbsp;
+      <button *ngIf="unexCurls.length > 0" (click)="sendAllToUnex()">Send all to UNEX</button>
+      <br>
+      <u style="color : blue" *ngIf="unexCurls.length>0" (click)="showUnexCurls=!showUnexCurls">Show or hide CURLS</u>
+    </div>
+      
+    <div style="max-height: 1200px; overflow-y: auto;" *ngIf="showUnexCurls">
+        <div>
+          There are {{ unexCurls.length }} CURLS for Extremadura. 
+        </div>
+
+        <div>
+          <progress [value]="unexProgress" [max]="unexCurls.length"></progress>
+        </div>
+
+        <ol>
+          <li *ngFor="let curl of unexCurls">
+            <u (click)="curl.curlTextVisible = !curl.curlTextVisible">Show CURL</u>
+            &nbsp;
+            <button (click)="sendToUnex(curl)"><i>Send to UNEX</i></button>
+            &nbsp;
+            <i *ngIf="curl.result==0">Not sent</i>
+            <span *ngIf="curl.result >= 400" style="color: red">
+              Error {{ curl.result }}
+            </span>
+            <span *ngIf="curl.result>0 && curl.result < 400" style="color: green">
+              Cool {{ curl.result }}
+            </span>
+            <i *ngIf="curl.result == -1" style="color: blue">
+              Sending
+            </i>
+            <div *ngIf="curl.curlTextVisible">{{ curl.curlText }}</div>            
+          </li>
+        </ol>
+    </div>
+
+    <table>
+      <tr>
+        <td colspan="2">
+          <span *ngFor="let mutant of manager.mutants">
+            <u style="color: blue" (click)="selectMutant(mutant)" [id]="'gm' + mutant.mutantIndex">{{ mutant.mutantIndex }}</u>&nbsp;
+          </span>
+        </td>
+      </tr>
+      
+      <tr>
+        <td colspan="2">
+          <b>Mutant execution</b><br>
+          Algorithm: <input type="radio" name="mutantExecutionAlgorithm" checked value="Simple" (change)="setMutantExecutionAlgorithm($event)">"As is"
+          &nbsp;&nbsp;
+          <input type="radio" value="AllAgainstAll" name="mutantExecutionAlgorithm" (change)="setMutantExecutionAlgorithm($event)">Run the circuit with specific inputs
+          <br>
+          Tolerated error: <input type="number" min="0" step="0.05" [(ngModel)]="toleratedError">
+        </td>
+      </tr>
+    </table>
+  </div>
+  

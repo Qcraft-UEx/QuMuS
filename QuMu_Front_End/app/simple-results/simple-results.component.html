@@ -1,0 +1,29 @@
+<h1>Simple Results</h1>
+
+<button (click)="runMutants()">Run mutants (simple)</button>
+&nbsp;&nbsp;
+<button (click)="stopExecution()">Stop execution</button>
+
+<ng-container *ngIf="runningMutants">
+    {{ killedMutants }}  <strong>killed mutants</strong> of &nbsp;{{ killedMutants+aliveMutants }}. 
+    <strong>Mutation score:</strong>&nbsp;{{ killedMutants/(killedMutants+aliveMutants) }}<br>
+    &nbsp;
+    <progress [value]="killedMutants+aliveMutants" [max]="manager.mutants.length"></progress>
+    <table>
+        <tr id="header1">
+            <th colspan="3">Original</th>
+        </tr>
+        <tr id="header2">
+            <th>Order</th>
+            <th>Binary</th>
+            <th>Frequency</th>
+        </tr>
+        <ng-container *ngIf="originalResults">
+            <tr *ngFor="let result of originalResults.executionResults; let j=index" [id]="'row' + j">
+                <td align="right">{{ result.order }}</td>
+                <td align="right"><sub>{{ result.binary }}</sub></td>
+                <td align="center" [ngStyle]="{'background-color': (result.frequency>0) ? 'lightgreen' : ''}">{{ result.frequency }}</td>
+            </tr>
+        </ng-container>
+    </table>
+</ng-container>
