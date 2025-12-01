@@ -109,6 +109,13 @@ cd db
 sudo docker compose up --build
 ```
 
+### Quantum Provider Configuration
+Users must supply valid IBM Quantum API credentials through:
+
+```bash
+export QISKIT_IBM_TOKEN="your_api_key"
+```
+
 ---
 
 ## Usage
