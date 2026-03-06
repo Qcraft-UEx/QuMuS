@@ -134,6 +134,94 @@ This approach allows massive parallel execution of mutants, optimizing time, cos
 
 ---
 
+## Validation 
+QuMuS has been experimentally validated on real quantum hardware from both IBM Quantum and Amazon Braket to demonstrate its effectiveness in executing large sets of quantum circuit mutants through multi-programming.
+
+The validation focuses on efficiency improvements (execution time and cost reduction) and statistical fidelity preservation of results when executing mutants in parallel.
+
+To quantify fidelity, we used two statistical metrics commonly employed in NISQ noise analysis:
+
+- Hellinger Distance (HD)
+- Jensen–Shannon Divergence (JSD)
+
+These metrics measure how close the probability distributions obtained from scheduled executions are compared to executing each mutant independently.
+
+### IBM Quantum Validation
+
+The main evaluation was performed on IBM Quantum's 127-qubit ibm_brisbane processor, using 10,000 shots per execution.
+
+Three representative quantum circuits were selected:
+
+| Circuit              | Qubits | Mutants |
+| -------------------- | ------ | ------- |
+| Stochastic circuit   | 15     | 1,344   |
+| Adder                | 7      | 1,570   |
+| Adder (deep variant) | 7      | 9,280   |
+
+These circuits represent different execution scenarios:
+- Deterministic circuits (adder): easier error detection.
+- Deep circuits: more sensitive to noise accumulation.
+- Probabilistic circuits: suitable for distributional analysis.
+
+Results:
+
+| Example     | Time (s)                | Cost (USD)                | HD    | JSD |
+| ----------- | ----------------------- | ------------------------- | ----- | --- |
+| Stochastic  | 10,752 → 600 (94.41%)   | $17,203 → $960 (94.41%)   | 22.1% | 12% |
+| Adder       | 9,420 → 528 (94.39%)    | $15,072 → $844.8 (94.40%) | 35.7% | 3%  |
+| Adder-phase | 92,800 → 7,733 (91.66%) | $148,480 → $12,373 (92%)  | 15.4% | 5%  |
+
+<p align="center"> 
+   <picture>
+     <source media="(prefers-color-scheme: dark)" srcset="https://github.com/Qcraft-UEx/QuMuS/blob/6d026eabe93d4987b3e12e1ff6cd2f0ca3c383f8/mutants-noise-results/ibm/plot/hellinger_jensen__ibm_plot.png?raw=true" width="80%">
+     <img src="https://github.com/Qcraft-UEx/QuMuS/blob/6d026eabe93d4987b3e12e1ff6cd2f0ca3c383f8/mutants-noise-results/ibm/plot/hellinger_jensen__ibm_plot.png?raw=true" width="60%" alt="Results_ibm">
+   </picture>
+</p>
+
+### Amazon Braket Validation
+To demonstrate compatibility with Amazon Braket, an additional experiment was conducted using the Rigetti Ankaa-3 processor (82 qubits). 
+
+Because Braket devices currently offer fewer qubits than IBM machines, executing the full mutant set would require a large number of tasks. Therefore, a representative sample of 10% of the mutants from the deep 7-qubit adder circuit was selected.
+- Total scheduled tasks executed: 16
+- Full experiment would require: >790 tasks
+
+Fidelity Results:
+
+The probability distributions obtained from scheduled executions remained close to those obtained from isolated executions.
+
+| Metric                         | Value  |
+| ------------------------------ | ------ |
+| Mean Hellinger Distance        | 24% |
+| Mean Jensen–Shannon Divergence | 0.5% |
+
+<p align="center"> 
+   <picture>
+     <source media="(prefers-color-scheme: dark)" srcset="https://github.com/Qcraft-UEx/QuMuS/blob/6d026eabe93d4987b3e12e1ff6cd2f0ca3c383f8/mutants-noise-results/ibm/plot/hellinger_jensen__aws_plot.png?raw=true" width="60%">
+     <img src="https://github.com/Qcraft-UEx/QuMuS/blob/6d026eabe93d4987b3e12e1ff6cd2f0ca3c383f8/mutants-noise-results/ibm/plot/hellinger_jensen__aws_plot.png?raw=true" width="60%" alt="Results_ibm">
+   </picture>
+</p>
+
+Cost Reduction:
+| Execution Mode       | Cost  |
+| -------------------- | ----- |
+| Scheduled execution  | $58.8 |
+| Individual execution | $1674 |
+
+This represents a 96.48% cost reduction using QuMuS scheduling.
+
+### Summary
+
+Across both IBM Quantum and Amazon Braket platforms, QuMuS demonstrates:
+
+- 90% reduction in execution time
+- 90% reduction in execution cost
+- Acceptable statistical fidelity for mutation analysis
+- Scalability to thousands of mutants on real NISQ hardware
+
+These results confirm that QuMuS enables large-scale quantum mutation testing campaigns that would otherwise be impractical using sequential executions.
+
+---
+
 ## Changelog
 The changelog is available [here](https://github.com/Qcraft-UEx/QCRAFT-AutoScheduler/blob/main/CHANGELOG.md)
 
